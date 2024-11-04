@@ -1,0 +1,7 @@
+git config --global user.name "Ramyacmd-676"
+git config --global user.email "2022cs_ramyakm_c@nie.ac.in"
+git clone https://github.com/Ramya-cmd676/devopsIntro.git
+git add .
+git commit -m "message"
+git push origin main
+git pull origin main

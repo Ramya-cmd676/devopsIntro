@@ -9,7 +9,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Clone the repository
-                git 'hhttps://github.com/Ramya-cmd676/devopsIntro.git'
+                git branch: 'main', url:'https://github.com/Ramya-cmd676/devopsIntro.git'
             }
         }
 

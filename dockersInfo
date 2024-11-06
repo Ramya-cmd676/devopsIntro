@@ -1,0 +1,93 @@
+Create EC2 instance (ubuntu, http,sh,all tcp)
+sudo su
+apt update
+apt install docker.io
+docker images
+docker pull <image name> (can be extracted from docker hub)
+docker pull httpd
+docker pull jenkins/jenkins
+docker ps (to check which images are running)
+
+docker run -itd -p "7700:80" httpd (here,
+                                    run- to make container run
+                                    for httpd port no is 80 we are forwarding to 7700)
+
+(now if we go for publicip:7700, webpage says it works!)
+
+![alt text](image.png)
+
+(we can give diff port number for same container)
+
+docker run -itd -p 8020:8080 -p 50000:50000 jenkins/jenkins
+
+(now, we should modify index.html of the httpd server)
+(since it is installed in isolated envi, using following commands, enter into apache envi)
+
+docker exec -it <1st 2 char of container id> /bin/bash
+
+ls
+cd htdocs (there we have index.html)
+modify by vi index.html
+(to install vi editor,,
+apt update
+apt install vim)
+
+(modify and check if its getting modified)
+
+Experiments on adding and deleting containers:
+
+docker stop <container id>
+docker ps -a
+docker start <contiainer id>
+docker rm <id>
+docker rm -f <id>
+
+To remove images,,, 
+
+docker rmi <container id >
+
+//some other commands with continers
+
+docker inspect <container id> 
+docker logs <container id> (details about httpd requests)
+docker stats <container id> (details about the cpu , memory and other statistics)
+docker top <container id> (details about PID PPID etc)
+
+//to create container with name 
+docker run -itd --name webserver -p "6600:80" httpd
+
+
+//web server experiment
+
+
+
+
+docker run -itd --name webserver -p "6600:80" httpd
+   56  docker ps
+   57  docker exec -it webserver
+   58  docker exec -it webserver /bin/bash
+   59  history
+   60  docker exec -it webserver /bin/bash
+   61  docker images
+   62  docker ps
+   63  docker commit 3a myImage:vi.0
+   64  docker commit 3a myimage:vi.0
+   65  docker images
+   66  docker save -o /usr/local/myimagesbackup.tar myimage:vi.0
+   67  ls
+   68  cd usr/local
+   69  ls -lrt
+   70  cd /usr/local
+   71  ls
+   72  cd myimagesbackup.tar 
+   73  cat myimagesbackup.tar
+   74  cd usr
+   75  cd /usr/local
+   76  ls
+   77  docker load -i myimagesbackup.tar
+   78  docker images
+   79  docker login
+   80  docker tag myimage:vi.0 dockerramya5250/httpd_vim_git
+   81  docker push dockerramya5250/httpd_vim_git
+   82  docker tag myimage:vi.0 ramya5250/httpd_vim_git
+   83  docker push ramya5250/httpd_vim_git
